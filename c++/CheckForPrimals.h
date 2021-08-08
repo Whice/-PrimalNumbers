@@ -1,4 +1,4 @@
-#include "PrimalNumberKeeper.h"
+п»ї#include "PrimalNumberKeeper.h"
 
 class CheckForPrimals
 {
@@ -11,37 +11,37 @@ public:
 	{
 
 	}
-	/// <summary>Проверка простое ли число.</summary>
+	/// <summary>РџСЂРѕРІРµСЂРєР° РїСЂРѕСЃС‚РѕРµ Р»Рё С‡РёСЃР»Рѕ.</summary>
 	static bool IsPrimal(uint64_t number, Memory &memoryForKeeper)
 	{
 		vector<uint64_t> keeper = memoryForKeeper.GetKeeper();
-		//Вычислить корень один раз.
+		//Р’С‹С‡РёСЃР»РёС‚СЊ РєРѕСЂРµРЅСЊ РѕРґРёРЅ СЂР°Р·.
 		uint64_t sqrtNumber = sqrt(number);
 		uint64_t keeperSize = keeper.size();
-		//Пройтись по списку уже найденых чисел.
+		//РџСЂРѕР№С‚РёСЃСЊ РїРѕ СЃРїРёСЃРєСѓ СѓР¶Рµ РЅР°Р№РґРµРЅС‹С… С‡РёСЃРµР».
 
 		for(int i=0;i<keeperSize;++i)
 		{
-			//Если делится - отстой.
+			//Р•СЃР»Рё РґРµР»РёС‚СЃСЏ - РѕС‚СЃС‚РѕР№.
 			if (number % keeper[i] == 0)
 				return false;
-			//Если корень был пройден, то дальше нет смысла смотреть - все ок.
+			//Р•СЃР»Рё РєРѕСЂРµРЅСЊ Р±С‹Р» РїСЂРѕР№РґРµРЅ, С‚Рѕ РґР°Р»СЊС€Рµ РЅРµС‚ СЃРјС‹СЃР»Р° СЃРјРѕС‚СЂРµС‚СЊ - РІСЃРµ РѕРє.
 			if (sqrtNumber < keeper[i])
 				return true;
 		}
-		//Тут мы никогда не побываем, как на море.
-		//Но пусть будет, оно придает ощущение безопасности(как картинка моря).
+		//РўСѓС‚ РјС‹ РЅРёРєРѕРіРґР° РЅРµ РїРѕР±С‹РІР°РµРј, РєР°Рє РЅР° РјРѕСЂРµ.
+		//РќРѕ РїСѓСЃС‚СЊ Р±СѓРґРµС‚, РѕРЅРѕ РїСЂРёРґР°РµС‚ РѕС‰СѓС‰РµРЅРёРµ Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё(РєР°Рє РєР°СЂС‚РёРЅРєР° РјРѕСЂСЏ).
 		return true;
 	}
 
-	/// <summary>Проверка на простоту всех чисел в диапазоне и добавление их в список-хранитель.</summary>
+	/// <summary>РџСЂРѕРІРµСЂРєР° РЅР° РїСЂРѕСЃС‚РѕС‚Сѓ РІСЃРµС… С‡РёСЃРµР» РІ РґРёР°РїР°Р·РѕРЅРµ Рё РґРѕР±Р°РІР»РµРЅРёРµ РёС… РІ СЃРїРёСЃРѕРє-С…СЂР°РЅРёС‚РµР»СЊ.</summary>
 	static void RangeCheck(uint64_t &numberStart, const uint64_t &range, Memory &memoryForKeeper)
 	{
 
 		vector<uint64_t> keeper = memoryForKeeper.GetKeeper();
-		//Посчитать максимум
+		//РџРѕСЃС‡РёС‚Р°С‚СЊ РјР°РєСЃРёРјСѓРј
 		uint64_t numberMax = numberStart + range;
-		//Довести до значения 5
+		//Р”РѕРІРµСЃС‚Рё РґРѕ Р·РЅР°С‡РµРЅРёСЏ 5
 		uint64_t currentNumber = numberStart;
 		if (currentNumber % 2 == 0)
 			++currentNumber;
@@ -50,7 +50,7 @@ public:
 			if (IsPrimal(currentNumber, memoryForKeeper)) { keeper.push_back(currentNumber); }
 			currentNumber += 2;
 		}
-		//Теперь currentNumber не делится на 2, а на 5 делится.
+		//РўРµРїРµСЂСЊ currentNumber РЅРµ РґРµР»РёС‚СЃСЏ РЅР° 2, Р° РЅР° 5 РґРµР»РёС‚СЃСЏ.
 		for (uint64_t i = currentNumber; i < numberMax; i += 10)
 		{
 			//XXX7
@@ -66,14 +66,14 @@ public:
 		memoryForKeeper.SetKeeper(keeper);
 	}
 
-	/// <summary>Проверка на простоту всех чисел в диапазоне и возвращение их отдельным списком.</summary>
+	/// <summary>РџСЂРѕРІРµСЂРєР° РЅР° РїСЂРѕСЃС‚РѕС‚Сѓ РІСЃРµС… С‡РёСЃРµР» РІ РґРёР°РїР°Р·РѕРЅРµ Рё РІРѕР·РІСЂР°С‰РµРЅРёРµ РёС… РѕС‚РґРµР»СЊРЅС‹Рј СЃРїРёСЃРєРѕРј.</summary>
 	static vector<uint64_t> GetListPrimalNumbers(uint64_t &numberStart, const uint64_t &range, Memory &memoryForKeeper)
 	{
-		//Посичтать максимум
+		//РџРѕСЃРёС‡С‚Р°С‚СЊ РјР°РєСЃРёРјСѓРј
 		uint64_t numberMax = numberStart + range;
-		//завести локальный список для найденых простых чисел
+		//Р·Р°РІРµСЃС‚Рё Р»РѕРєР°Р»СЊРЅС‹Р№ СЃРїРёСЃРѕРє РґР»СЏ РЅР°Р№РґРµРЅС‹С… РїСЂРѕСЃС‚С‹С… С‡РёСЃРµР»
 		vector<uint64_t> localKeeper;
-		//Довести до значения 5
+		//Р”РѕРІРµСЃС‚Рё РґРѕ Р·РЅР°С‡РµРЅРёСЏ 5
 		uint64_t currentNumber = numberStart;
 		if (currentNumber % 2 == 0)
 			++currentNumber;
@@ -82,7 +82,7 @@ public:
 			if (IsPrimal(currentNumber, memoryForKeeper)) { localKeeper.push_back(currentNumber); }
 			currentNumber+=2;
 		}
-		//Теперь currentNumber не делится на 2, а на 5 делится.
+		//РўРµРїРµСЂСЊ currentNumber РЅРµ РґРµР»РёС‚СЃСЏ РЅР° 2, Р° РЅР° 5 РґРµР»РёС‚СЃСЏ.
 		for (uint64_t i = currentNumber; i < numberMax; i += 10)
 		{
 			//XXX7

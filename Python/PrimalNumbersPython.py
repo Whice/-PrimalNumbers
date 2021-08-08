@@ -1,28 +1,34 @@
-import CheckForPrimals
+﻿import CheckForPrimals
 import PrimalNumberKeeper
 from datetime import datetime
 
+
+print("До какого числа искать? (печатается каждыей последний из 100 000 наденых.)")
+maxNumber=int(input())
+
+memoryForKeeper = PrimalNumberKeeper.Memory()
+memoryForKeeper.CreateKeeper()
 #Выдать первоначальные значения хранителю
-keeper = PrimalNumberKeeper.CreateKeeper();
+keeper = memoryForKeeper.GetKeeper();
 
 #Диапазон для проверки и текущий номер
 #Он обязательно должен быть кратен 10
-rangeForCheck = 1_000_000
-currentNumber = 3
+rangeForCheck = 100_000
+currentNumber = 8
 
 #Запомнить время запуска.
 start = datetime.now();
 
-while (10_000_000 > currentNumber):
+while (maxNumber > currentNumber):
     #Пребор и проверка
         if (keeper[-1] < rangeForCheck):
-                CheckForPrimals.RangeCheck(currentNumber, rangeForCheck)
+                CheckForPrimals.CheckForPrimal.RangeCheck(currentNumber, rangeForCheck, memoryForKeeper)
         else:
         #добавить к хранителю все числа диапазона, которые оказались простыми.
-                PrimalNumberKeeper.AddKeeper(CheckForPrimals.GetListPrimalNumbers(currentNumber, rangeForCheck))
+                memoryForKeeper.AddKeeper(CheckForPrimals.CheckForPrimal.GetListPrimalNumbers(currentNumber, rangeForCheck, memoryForKeeper))
                 println(keeper[-1])
                 currentNumber += rangeForCheck;
         end = datetime.now();
-        println("Выполнение заняло: " +  (end-start))
+        print("Выполнение заняло: " +  (end-start))
 
 
