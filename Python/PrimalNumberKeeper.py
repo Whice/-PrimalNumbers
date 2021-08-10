@@ -13,7 +13,7 @@ class Memory():
         #Добавить к концу хранителя список чисел.
         @classmethod
         def AddKeeper(self, addList):
-            for i in range(0, len(addList)):
+            for i in addList:
                 self._keeper.append(i)
 
         #Получить хранителя(список найдены протых чисел).
@@ -26,6 +26,3 @@ class Memory():
         def SetKeeper(self, newKeeper):
                 if len(newKeeper)>len(self._keeper):
                         self._keeper=newKeeper
-        
-memoryForKeeper = Memory()
-memoryForKeeper.CreateKeeper()

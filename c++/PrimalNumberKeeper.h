@@ -38,10 +38,12 @@ public:
 	/// <summary>
 	///	Добавить к концу хранителя список чисел.
 	/// </summary>
-	void AddKeeper(vector<uint64_t> addList)
+	void AddKeeper(vector<uint64_t> *addList)
 	{
-		for (uint64_t num : addList)
-			keeper.push_back(num);
+		int sizeList = (*addList).size();
+		for(int i=0;i< sizeList;++i)
+			keeper.push_back((*addList)[i]);
+		delete addList;
 	}
 
 	/// <summary>
