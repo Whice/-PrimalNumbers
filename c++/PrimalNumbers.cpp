@@ -29,9 +29,9 @@ int main()
 
 	while (maxNumber > currentNumber)
 	{
-		vector<uint64_t> keeper = memoryForKeeper.GetKeeper();
+		vector<uint64_t>* keeper = memoryForKeeper.GetKeeper();
 		//Пребор и проверка
-		if (keeper.back() < rangeForCheck)
+		if ((*keeper).back() < rangeForCheck)
 		{
 			CheckForPrimals::RangeCheck(currentNumber, rangeForCheck, memoryForKeeper);
 		}
@@ -40,7 +40,7 @@ int main()
 			//добавить к хранителю все числа диапазона, которые оказались простыми.
 			memoryForKeeper.AddKeeper(CheckForPrimals::GetListPrimalNumbers(currentNumber, rangeForCheck, memoryForKeeper));
 		}
-		std::cout<< keeper.back() <<endl;
+		std::cout<< (*keeper).back() <<endl;
 		currentNumber += rangeForCheck;
 	}
 	auto end = std::chrono::system_clock::now();
